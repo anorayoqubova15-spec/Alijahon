@@ -1,0 +1,126 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block body %}
+    <div class="hero-section">
+        <div class="container-fluid px-0">
+            <div id="owl-carousel-one" class="owl-carousel hero-carousel">
+                <div class="item banner-item">
+                    <img class="img-fluid w-100 banner-image"
+                         src="{% static 'apps/slider2.png' %}"
+                         alt="Banner 1">
+                </div>
+                <div class="item banner-item">
+                    <img class="img-fluid w-100 banner-image"
+                         src="{% static 'apps/slider1.png' %}"
+                         alt="Banner 2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="categories-section py-4">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-4 col-md-4 col-lg-3">
+                    <a href="" class=" category-card">
+                        <div class="category-image-wrapper">
+                            <img class="category-image"
+                                 src="{% static 'apps/9FAD31AD-312A-44A0-9AC3-247DA89DE70E.png' %}"
+                                 alt="sdf">
+                        </div>
+                        <h6 class="category-title">Bolalar uchun</h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="products-section py-5 bg-light">
+        <div class="container">
+            <div class="section-header mb-4">
+                <h2 class="section-title">Eng ko'p sotiladigan</h2>
+                <a href="https://alijahon.uz/category" class="view-all-link">
+                    Barchasini ko'rish
+                    <i class="icofont-rounded-right"></i>
+                </a>
+            </div>
+
+            {% for product in products %}
+
+                <div class="row g-4">
+                    <div class="owl-item" style="width: 346px;">
+                        <div class="item">
+                            <div class="product-card">
+                                <a href="{% url 'product_detail' product.pk %}"
+                                   class="product-image-link">
+                                    <div class="product-image-wrapper">
+                                        <img class="product-image" src="{{ product.photo.url }}"
+                                             alt="{{ product.title }}"
+                                             loading="lazy">
+                                    </div>
+                                </a>
+                                <div class="product-info">
+                                  <h6 class="product-title">
+                                      <a href="{% url 'product_detail' product.pk %}">{{ product.title }}</a>
+                                    </h6>
+                                    <p class="product-price">{{ product.price }} so'm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <section class="products-section py-5">
+        <div class="container">
+            <div class="section-header mb-4">
+                <h2 class="section-title">Yangi mahsulotlar</h2>
+                <a href="/category" class="view-all-link">
+                    Barchasini ko'rish
+                    <i class="icofont-rounded-right"></i>
+                </a>
+            </div>
+
+            <div class="owl-carousel owl-carousel-category owl-theme">
+
+                    {% for product in products %}
+
+                        <div class="item">
+                        <div class="product-card">
+                            <a href="{% url 'product_detail' product.pk %}" class="product-image-link">
+                                <div class="product-image-wrapper">
+                                    <img class="product-image"
+                                         src="{{ product.photo.url }}"
+                                         alt="{{ product.title }}"
+                                         loading="lazy">
+                                </div>
+                            </a>
+                            <div class="product-info">
+                                <h6 class="product-title">
+                                    <a href="">
+                                        {{ product.title }}
+                                    </a>
+                                </h6>
+                                <p class="product-price">{{ product.price }} so'm</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}

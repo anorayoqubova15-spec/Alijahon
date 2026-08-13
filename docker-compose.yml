@@ -1,0 +1,34 @@
+services:
+  ali:
+    build: .
+    image: ali:alpine
+    container_name: ali_con
+    restart: always
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/var/www/alijahon
+    command: python manage.py runserver 0.0.0.0:4000
+    environment:
+      - DATABASE_URL=postgres://postgres:11@ali_db:5432/postgres
+    depends_on:
+      - ali_db
+
+  ali_db:
+    image: postgres:alpine
+    container_name: ali_db_con
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=11
+    ports:
+      - "5434:5432"
+    volumes:
+      - ali_data:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  ali_data:

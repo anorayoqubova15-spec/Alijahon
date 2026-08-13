@@ -1,0 +1,807 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Slim body ozdiruvchi ayollar uchun - Alijahon.uz</title>
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="{% static 'apps/img/fav-icon.png' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'apps/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Select2 CSS -->
+    <link href="{% static 'apps/select2-bootstrap.css' %}"/>
+    <link href="{% static 'apps/select2.min.css' %}" rel="stylesheet"/>
+    <!-- Font Awesome-->
+    <link href="{% static 'apps/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'apps/icofont.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'apps/style.css' %}" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="{% static 'apps/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'apps/owl.theme.cs' %}">
+</head>
+<body>
+
+
+<style>
+    .modern-header {
+        background: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .modern-navbar {
+        padding: 0;
+    }
+
+    .navbar-brand-modern {
+        padding: 12px 0;
+    }
+
+    .navbar-brand-modern img {
+        height: 45px;
+        width: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .navbar-brand-modern:hover img {
+        transform: scale(1.05);
+    }
+
+    .nav-link-modern {
+        padding: 20px 16px !important;
+        font-weight: 600;
+        color: #475569 !important;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .nav-item.dropdown.mega-menu {
+        position: static;
+    }
+
+    .nav-item.dropdown.profile-dropdown-nav {
+        position: relative;
+    }
+
+    .nav-link-modern::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transition: width 0.3s ease;
+    }
+
+    .nav-link-modern:hover,
+    .nav-link-modern.active {
+        color: #667eea !important;
+    }
+
+    .nav-link-modern:hover::after {
+        width: 80%;
+    }
+
+    .search-box-header {
+        position: relative;
+        width: 400px;
+        max-width: 100%;
+    }
+
+    .search-box-header input {
+        width: 100%;
+        padding: 10px 45px 10px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+    .search-box-header input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+
+    .search-box-header button {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-dropdown-modern {
+        border-radius: 16px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+        border: none !important;
+        padding: 8px 0;
+        margin-top: 10px;
+        min-width: 250px;
+        right: 0 !important;
+        left: auto !important;
+    }
+
+    .dropdown-item-modern {
+        padding: 12px 24px;
+        font-weight: 500;
+        color: #475569;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .dropdown-item-modern i {
+        width: 20px;
+        font-size: 18px;
+        color: #667eea;
+    }
+
+    .dropdown-item-modern:hover {
+        background: linear-gradient(90deg, rgba(102, 126, 234, 0.08) 0%, transparent 100%);
+        color: #667eea;
+    }
+
+    .profile-pic-modern {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: 2px solid #667eea;
+        object-fit: cover;
+    }
+
+    .mega-dropdown-modern {
+        border-radius: 16px !important;
+        border: none !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+        padding: 30px 20px !important;
+        margin-top: 10px !important;
+        width: 90% !important;
+        max-width: 1200px !important;
+        left: 5% !important;
+        right: 5% !important;
+    }
+
+    .mega-list-modern {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .mega-list-modern a {
+        padding: 8px 12px;
+        color: #475569;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 13px;
+        white-space: nowrap;
+        display: block;
+    }
+
+    .mega-list-modern a:hover {
+        background: linear-gradient(90deg, rgba(102, 126, 234, 0.08) 0%, transparent 100%);
+        color: #667eea;
+        transform: translateX(4px);
+    }
+
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    .navbar-toggler-modern {
+        border: 2px solid #667eea;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    @media (max-width: 992px) {
+        .search-box-header {
+            width: 100%;
+            margin: 16px 0;
+        }
+
+        .nav-link-modern {
+            padding: 12px 16px !important;
+        }
+
+        .nav-link-modern::after {
+            display: none;
+        }
+
+        .mega-dropdown-modern {
+            min-width: 100% !important;
+            left: 0 !important;
+            transform: none !important;
+            padding: 16px !important;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .mega-dropdown-modern .row {
+            flex-direction: column;
+        }
+
+        .mega-dropdown-modern .col-lg-2 {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="modern-header">
+    <nav class="navbar navbar-expand-lg navbar-light modern-navbar">
+        <div class="container">
+            <a class="navbar-brand navbar-brand-modern" href="/">
+                <img src="{% static 'apps/alijahon.png' %}" alt="Alijahon.uz">
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-modern" type="button" data-toggle="collapse"
+                    data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-modern" href="/">
+                            <i class="icofont-ui-home"></i> Bosh sahifa
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link nav-link-modern dropdown-toggle" href="#" data-toggle="dropdown">
+                            <i class="icofont-list"></i> Kategoriyalar
+                        </a>
+                        <div class="dropdown-menu mega-dropdown-modern">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="mega-list-modern">
+
+                                        <a href="/category/uy-uchun">
+                                            Uy ruzg&#x27;or uchun maxsulotlar
+                                        </a>
+
+                                        <a href="/category/bolalar-uchun">
+                                            Bolalar uchun maxsulotlar
+                                        </a>
+
+                                        <a href="/category/sovga">
+                                            Sovg&#x27;alar
+                                        </a>
+
+                                        <a href="/category/ayollar">
+                                            Ayollar uchun maxsulotlar
+                                        </a>
+
+                                        <a href="/category/davolovchi-mahsulotlar">
+                                            Davolovchi mahsulotlar
+                                        </a>
+
+                                        <a href="/category/erkaklar-uchun">
+                                            Erkaklar uchun maxsulotlar
+                                        </a>
+
+                                        <a href="/category/fitnes">
+                                            Fitnes trenajorlar
+                                        </a>
+
+                                        <a href="/category/davolovchi-mazlar">
+                                            Davolovchi mazlar
+                                        </a>
+
+                                        <a href="/category/moshina-uchun">
+                                            Moshina uchun
+                                        </a>
+
+                                        <a href="/category/kitoblar">
+                                            Kitoblar
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="mega-list-modern">
+
+                                        <a href="/category/aqlli-soatlar">
+                                            soatlar
+                                        </a>
+
+                                        <a href="/category/atir">
+                                            Atirlar
+                                        </a>
+
+                                        <a href="/category/yangi-yel-maxsulotlari">
+                                            Yangi yil maxsulotlari
+                                        </a>
+
+                                        <a href="/category/eliktironika">
+                                            Elektironika
+                                        </a>
+
+                                        <a href="/category/kozoynaklar">
+                                            Kozoynaklar
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="mega-list-modern">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="mega-list-modern">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="mega-list-modern">
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="mega-list-modern">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-modern" href="/category">
+                            <i class="icofont-shopping-cart"></i> Do'kon
+                        </a>
+                    </li>
+                </ul>
+
+                <form action="/search" method="POST" class="search-box-header" autocomplete="off">
+                    <input type="hidden" name="csrfmiddlewaretoken"
+                           value="Wpe6RtJ5DqLAodGU37D1zf95Mr6JcfK8OsUXIk1GpGcd82VV73Fq3iGzmwsJh4Di">
+                    <input id="search-input" name="product" type="search" placeholder="Mahsulot qidirish..."/>
+                    <button type="submit">
+                        <i class="icofont-search"></i>
+                    </button>
+                </form>
+
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a href="#" data-target="#login" data-toggle="modal" class="nav-link nav-link-modern">
+                            <i class="icofont-ui-user"></i> Kirish
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<section class="py-2  inner-header">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-lg-12">
+                <div class="breadcrumbs">
+                    <p class="mb-0"><a href="/"><span class="icofont icofont-ui-home"></span>
+                        Bosh sahifa</a>
+                        <span class="icofont icofont-thin-right"></span>
+                        <a href="/category/ayollar">Ayollar uchun maxsulotlar</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 shop-single bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="shop-detail-left">
+                    <div class="shop-detail-slider position-relative">
+                        <div id="sync1" class="border rounded shadow-sm bg-white mb-2 owl-carousel text-center">
+
+
+                            <div class="item bg-b">
+                                <img alt="" src="{% static '/media/products/2023/10/19/IMG_0496.webp' %}"
+                                     class="card-img-top product-image">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="shop-detail-right">
+                    <div class="border rounded shadow-sm bg-white p-4">
+                        <div class="product-name">
+                            <!-- <p class="text-danger text-uppercase mb-0"> <i class="icofont-sale-discount"></i> 50% Off</p> -->
+                            <h2>{{ product.title }}</h2>
+                        </div>
+                        <div class="price-box">
+                            <h5>
+                                {% if flow %}
+                                    <span class="product-price text-danger"
+                                          id="dynamic-price">{{ flow.discount }} so'm</span>
+                                {% else %}
+                                    <span class="product-price text-danger"
+                                          id="dynamic-price">{{ product.price }} so'm</span>
+                                {% endif %}
+
+
+                            </h5>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="product-variation">
+                            <form method="post" id="order-form">
+                                <input type="hidden" name="csrfmiddlewaretoken"
+                                       value="Wpe6RtJ5DqLAodGU37D1zf95Mr6JcfK8OsUXIk1GpGcd82VV73Fq3iGzmwsJh4Di">
+                                <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+                                <div class="controls">
+                                    <label>Ism <span class="text-danger">*</span></label>
+                                    <input type="text"
+                                           placeholder="Ism"
+                                           class="form-control"
+                                           name="full_name"
+                                           required
+                                           maxlength="50"
+                                           pattern="^[a-zA-Z0-9\sа-яА-ЯёЁўЎқҚғҒҳҲ]+$"
+                                           oninput="this.value = this.value.replace(/[^a-zA-Z0-9\sа-яА-ЯёЁўЎқҚғҒҳҲ]/g, '')"
+                                           title="Faqat harf va raqam kiritish mumkin">
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="controls">
+                                    <label>Telefon <span class="text-danger">*</span></label>
+                                    <input type="text" placeholder="Telefon" class="form-control" id="phone-mask-two"
+                                           required name="phone_number">
+                                    <p class="help-block"></p>
+                                </div>
+
+
+                                <label for="quantity">Soni :</label>
+                                <select name="quantity" id="quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                                <span class="float-right">
+                              <button type="submit" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp; <i
+                                      class="icofont icofont-shopping-cart"></i> Buyurtma berish &nbsp;&nbsp;&nbsp;</button>
+                              </span>
+                            </form>
+                        </div>
+                        Yetkazib berish O'zbekiston bo'ylab 30 000 so'm
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="det" class="pb-5 pt-0 shop-single-detail bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="rounded shadow-sm bg-white">
+                    <ul class="nav nav-pills p-3" id="pills-tab" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" id="pills-home-tab" data-toggle="pill"
+                                                href="#pills-home" role="tab" aria-controls="pills-home"
+                                                aria-selected="true">Batafsil</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content p-4 border-top" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                             aria-labelledby="pills-home-tab">
+                            <p>
+                            <p>{{ product.description }}</p>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-white border-bottom border-top">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <div class="border-right py-5 pr-5"><b>Tezkor yetkazish</b><br>
+                    Buyurtmangiz O'zbekiston bo'ylab 2 kun ichida yetqazib beriladi
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="border-right py-5 px-5">
+                    <b>To'lov turi</b><br>
+                    Buyurtmani oldindan click, payme yoki buyurtmani qo'lingizga olganingizdan keyin amalga oshiring.
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="py-5 pl-5">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</footer>
+<div class="copyright bg-light py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+                <p class="mb-0"><a href="/">Alijahon.uz</a> 2026 Barcha huquqlar himoyalangan
+                </p>
+            </div>
+            <div class="col-md-6 text-right">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade login-modal-main show" id="login" style="padding-right: 8px; display: none;"
+     aria-modal="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="login-modal">
+                    <div class="row">
+                        <div class="col-lg-6 d-flex align-items-center">
+                            <div class="login-modal-left p-4 text-center pl-5">
+                                <img src="{% static 'apps/alijahon.png' %}" alt="..."
+                                     style="width: 300px;">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="close close-top-right position-absolute"
+                                    data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="icofont-close-line"></i></span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <ul class="mt-4 mr-4 nav nav-tabs-login float-right position-absolute"
+                                role="tablist">
+                                <li>
+                                    <a class="nav-link-login active" data-toggle="tab" href="#login-form"
+                                       role="tab"><i class="icofont-ui-lock"></i> Login</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link-login" data-toggle="tab" href="#register" role="tab"><i
+                                            class="icofont icofont-pencil"></i> Ro'yxatdan o'tish</a>
+                                </li>
+                            </ul>
+                            <div class="login-modal-right p-4">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="login-form" role="tabpanel">
+                                        <form action="/login" method="post">
+                                            <input type="hidden" name="csrfmiddlewaretoken"
+                                                   value="Wpe6RtJ5DqLAodGU37D1zf95Mr6JcfK8OsUXIk1GpGcd82VV73Fq3iGzmwsJh4Di">
+                                            <h5 class="heading-design-h5 text-dark">Login</h5>
+                                            <fieldset class="form-group mt-4">
+                                                <label>Telefon</label>
+                                                <input type="text" id="phone-mask" class="form-control"
+                                                       name="phone_number" placeholder="Telefon raqam">
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <label>Parol</label>
+                                                <input type="password" class="form-control" name="password"
+                                                       placeholder="****">
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <button type="submit" class="btn btn-lg btn-primary btn-block">
+                                                    Kirish
+                                                </button>
+                                            </fieldset>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       id="customCheck1">
+                                                <label class="custom-control-label" for="customCheck1">
+                                                    Eslab qolish
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="tab-pane" id="register" role="tabpanel">
+                                        <form action="/register" method="post">
+                                            <input type="hidden" name="csrfmiddlewaretoken"
+                                                   value="Wpe6RtJ5DqLAodGU37D1zf95Mr6JcfK8OsUXIk1GpGcd82VV73Fq3iGzmwsJh4Di">
+                                            <h5 class="heading-design-h5 text-dark">Register</h5>
+                                            <fieldset class="form-group mt-4">
+                                                <label>Telefon</label>
+                                                <input type="text" id="phone-mask-two" name="phone_number"
+                                                       class="form-control" placeholder="Telefon raqam">
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <label>Parol</label>
+                                                <input type="password" name="password" class="form-control"
+                                                       placeholder="***">
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <label>Parolni takrorlash</label>
+                                                <input type="password" name="conf_password" class="form-control"
+                                                       placeholder="***">
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <button type="submit" class="btn btn-lg btn-primary btn-block">
+                                                    Yangi akkaunt ochish
+                                                </button>
+                                            </fieldset>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       id="customCheck2">
+                                                <label class="custom-control-label" for="customCheck2">
+                                                    <a href="#">Barcha shartlar</a>ga roziman
+                                                </label>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' %}"></script>
+<script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js' %}"></script>
+<script>
+    $('#phone-mask').inputmask({
+        "mask": "+\\9\\98(99) 999-99-99"
+    });
+    $('#phone-mask-two').inputmask({
+        "mask": "+\\9\\98(99) 999-99-99"
+    });
+</script>
+
+<script src="{% static 'apps/jquery.min.js' %}"></script>
+<script src="{% static 'apps/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'apps/select2.min.js' %}"></script>
+<script src="{% static 'apps/owl.carousel.js' %}"></script>
+<script src="{% static 'apps/custom.js' %}"></script>
+<script src="{% static 'apps/hc-offcanvas-nav.js' %}"></script>
+<link rel="stylesheet" href="{% static 'apps/demo.css' %}">
+<link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/icon?family=Material+Icons' %}">
+
+<script>
+    (function ($) {
+        var $main_nav = $('#main-nav');
+        var $toggle = $('.toggle');
+
+        var defaultOptions = {
+            disableAt: false,
+            customToggle: $toggle,
+            levelSpacing: 40,
+            navTitle: 'All Categories',
+            levelTitles: true,
+            levelTitleAsBack: true,
+            pushContent: '#container',
+            insertClose: 2
+        };
+
+        // call our plugin
+        var Nav = $main_nav.hcOffcanvasNav(defaultOptions);
+
+        // add new items to original nav
+        $main_nav.find('li.add').children('a').on('click', function () {
+            var $this = $(this);
+            var $li = $this.parent();
+            var items = eval('(' + $this.attr('data-add') + ')');
+
+            $li.before('<li class="new"><a href="#">' + items[0] + '</a></li>');
+
+            items.shift();
+
+            if (!items.length) {
+                $li.remove();
+            } else {
+                $this.attr('data-add', JSON.stringify(items));
+            }
+
+            Nav.update(true);
+        });
+
+        // demo settings update
+
+        const update = (settings) => {
+            if (Nav.isOpen()) {
+                Nav.on('close.once', function () {
+                    Nav.update(settings);
+                    Nav.open();
+                });
+
+                Nav.close();
+            } else {
+                Nav.update(settings);
+            }
+        };
+
+        $('.actions').find('a').on('click', function (e) {
+            e.preventDefault();
+
+            var $this = $(this).addClass('active');
+            var $siblings = $this.parent().siblings().children('a').removeClass('active');
+            var settings = eval('(' + $this.data('demo') + ')');
+
+            update(settings);
+        });
+
+        $('.actions').find('input').on('change', function () {
+            var $this = $(this);
+            var settings = eval('(' + $this.data('demo') + ')');
+
+            if ($this.is(':checked')) {
+                update(settings);
+            } else {
+                var removeData = {};
+                $.each(settings, function (index, value) {
+                    removeData[index] = false;
+                });
+
+                update(removeData);
+            }
+        });
+    })(jQuery);
+
+    $(document).ready(function () {
+        $('#types').on('change', function () {
+            var selectedPrice = $(this).find(':selected').data('price');
+            if (selectedPrice) {
+                $('#dynamic-price').text(selectedPrice + " so'm");
+            }
+        });
+    });
+</script>
+
+<script src="{% static 'https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447' %}"></script>
+<script>
+    grecaptcha.ready(function () {
+        document.getElementById('order-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var form = this;
+            grecaptcha.execute('6LdUZ4QsAAAAAPfRAQ_61KzE87icpVUdB9O2UvpU', {action: 'order'}).then(function (token) {
+                document.getElementById('g-recaptcha-response').value = token;
+                form.submit();
+            });
+        });
+    });
+</script>
+
+<script defer
+        src="{% static 'https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447' %}"
+        integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ=="
+        data-cf-beacon='{"version":"2024.11.0","token":"72b499923c304ca590d917e3955e9593","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

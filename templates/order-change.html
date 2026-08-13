@@ -1,0 +1,441 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block base %}
+    <!-- Принудительно подключаем Bootstrap и FontAwesome, если их нет в основном base.html -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .main-card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: none;
+            margin-bottom: 25px;
+            padding: 40px;
+        }
+
+        .form-section {
+            background: #ffffff;
+            border: 1px solid #eef2f5;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .order-info-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15);
+        }
+
+        .order-info-header h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding-bottom: 12px;
+            color: #f8fafc;
+        }
+
+        .order-info-header p {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            color: #cbd5e1;
+        }
+
+        .order-info-header p strong {
+            color: #ffffff;
+        }
+
+        .order-info-header a {
+            color: #38bdf8 !important;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .order-info-header a:hover {
+            color: #7dd3fc !important;
+            text-decoration: underline;
+        }
+
+        .badge-promo {
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            display: inline-block;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .status-option {
+            background: #f8fafc;
+            border: 2px solid #f1f5f9;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: block;
+            position: relative;
+        }
+
+        .status-option:hover {
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        .status-content {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .status-desc {
+            font-size: 0.9rem;
+            margin-top: 8px;
+            margin-left: 28px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .status-option:has(.form-check-input:checked) {
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border-color: #3b82f6; /* Подсветка активного бордера */
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+
+        .required-label::after {
+            content: " *";
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 6px 18px rgba(239, 68, 68, 0.45);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-card {
+                padding: 20px 15px;
+            }
+
+            .order-info-header {
+                padding: 20px;
+            }
+
+            .status-desc {
+                margin-left: 0;
+            }
+        }
+    </style>
+
+    <div class="container py-5" style="max-width: 900px;">
+        <div class="main-card">
+
+            <div class="order-info-header">
+                <h2><i class="fa-solid fa-circle-check text-success me-2"></i> Hammasi to'g'ri kiritilganligiga e'tibor
+                    bering!</h2>
+                <div class="row">
+                    <div class="col-md-8">
+                        <p><strong>Buyurtma Beruvchi Ism Sharifi:</strong> {{ order.full_name }}</p>
+                        <p><strong>Buyurtma Beruvchi Raqami:</strong> <a href="tel:+{{ order.phone_number }}"><i
+                                class="fa-solid fa-phone me-1"></i> +{{ order.phone_number }}</a></p>
+                        <p><strong>Mahsulot:</strong> {{ order.product.title }} — <span
+                                class="badge bg-light text-dark fs-6 fw-bold">{{ total|floatformat:0 }} sum</span></p>
+                    </div>
+                    <div class="col-md-4 text-md-end align-self-center mt-3 mt-md-0">
+                        <span class="badge-promo"><i class="fa-solid fa-fire me-1"></i> AKSIYA</span>
+                    </div>
+                </div>
+            </div>
+
+            {% if form.errors %}
+                <div class="alert alert-danger rounded-3">
+                    <strong>Форма заполнена некорректно:</strong>
+                    <ul class="mb-0 mt-1">
+                        {% for field, errors in form.errors.items %}
+                            <li>{{ field }}: {{ errors|striptags }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <form action="{% url 'order-update' order.pk %}" method="post">
+                {% csrf_token %}
+
+                {% if order.product %}
+                    <input type="hidden" name="product" value="{{ order.product.id }}">
+                {% endif %}
+                {% if order.flow %}
+                    <input type="hidden" name="flow" value="{{ order.flow.id }}">
+                {% endif %}
+
+                {% if request.user.role == 'admin' %}
+                    <div class="form-section">
+                        <div class="section-title">Buyurtma tarkibi va vaqti</div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="quantity" class="form-label required-label"><strong>Nechta:</strong></label>
+                                <input id="quantity" class="form-control" name="quantity" required type="number"
+                                       max="100" min="1" value="{{ order.quantity }}">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="delivery_date" class="form-label required-label"><strong>Yuborish
+                                    vaqti:</strong></label>
+                                <input type="date" class="form-control" name="delivery_date" id="delivery_date"
+                                       value="{{ order.delivery_date|date:'Y-m-d' }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-title">Yetkazib berish manzili</div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="id_region" class="form-label fw-semibold">Viloyat</label>
+                                <select class="form-select admin-region-select" id="id_region"
+                                        data-url="{% url 'get_districts' %}">
+                                    {% if order.city.region %}
+                                        <option value="{{ order.city.region.id }}" disabled
+                                                selected>{{ order.city.region.title }}</option>
+                                    {% else %}
+                                        <option value="" disabled selected>Viloyat tanlang</option>
+                                    {% endif %}
+                                    {% for region in regions %}
+                                        <option value="{{ region.id }}">{{ region.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_district" class="form-label fw-semibold">Tuman / Shahar</label>
+                                <select name="city" class="form-select admin-district-select" id="id_district">
+                                    <option value="" disabled>Tuman tanlang</option>
+                                    {% if order.city %}
+                                        <option value="{{ order.city.id }}" selected>{{ order.city.title }}</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Скрытые рабочие поля для валидации в UpdateView (для не-админов) -->
+                    <input type="hidden" name="quantity" value="{{ order.quantity }}">
+                    <input type="hidden" name="delivery_date" value="{{ order.delivery_date|date:'Y-m-d' }}">
+                    <input type="hidden" name="city" value="{{ order.city.id }}">
+
+                    <div class="form-section">
+                        <div class="section-title text-muted">Buyurtma tarkibi va vaqti (Faqat ko'rish)</div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><strong>Nechta:</strong></label>
+                                <input disabled class="form-control bg-light" type="number"
+                                       value="{{ order.quantity }}">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label"><strong>Yuborish vaqti:</strong></label>
+                                <input disabled type="date" class="form-control bg-light"
+                                       value="{{ order.delivery_date|date:'Y-m-d' }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-title text-muted">Manzil (Faqat ko'rish)</div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Viloyat</label>
+                                <input disabled class="form-control bg-light" type="text"
+                                       value="{{ order.city.region.title }}">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tuman / Shahar</label>
+                                <input disabled class="form-control bg-light" type="text"
+                                       value="{{ order.city.title }}">
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="form-section">
+                    <div class="section-title"><i class="fa-solid fa-gauge-high me-1"></i> Buyurtma holati</div>
+                    <p class="text-secondary small mb-3"><i class="fa-solid fa-circle-info"></i> Buyurtma holatini
+                        o'zgartirishdan oldin har bir ma'lumot to'g'ri to'ldirilganligiga ishonch hosil qiling.</p>
+                    <div class="alert alert-warning py-2.5 mb-4 fs-6 text-dark rounded-3 d-flex align-items-center"
+                         style="background-color: #fffbeb; border-color: #fef3c7;">
+                        <i class="fa-solid fa-triangle-exclamation text-warning me-2 fs-5"></i>
+                        <span>Har bir noto'g'ri to'ldirilgan holat uchun <strong>{{ site_settings.operator_repression }}</strong> sum jarima.</span>
+                    </div>
+
+                    <div class="mb-3">
+                        {% if request.user.role == 'deliver' %}
+                            <label class="status-option">
+                                <input class="form-check-input me-2" type="radio" name="status" value="delivering"
+                                        {% if order.status == 'delivering' %} checked {% endif %} required>
+                                <span class="status-content">Yetkazilmoqda</span>
+                                <span class="status-desc bg-warning text-dark"><i
+                                        class="fa-solid fa-truck-fast me-1"></i> Buyurtma hozir yetkazilmoqda.</span>
+                            </label>
+                            <label class="status-option">
+                                <input class="form-check-input me-2" type="radio" name="status" value="delivered"
+                                        {% if order.status == 'DELIVERED' %} checked {% endif %} required>
+                                <span class="status-content">Yetkazildi</span>
+                                <span class="status-desc bg-success text-white"><i
+                                        class="fa-solid fa-check-double me-1"></i> Buyurtma muvaffaqiyatli yetkazildi.</span>
+                            </label>
+                            <label class="status-option">
+                                <input class="form-check-input me-2" type="radio" name="status" value="cancel"
+                                        {% if order.status == 'CANCEL' %} checked {% endif %} required>
+                                <span class="status-content">Bekor qilindi</span>
+                                <span class="status-desc bg-danger text-white"><i class="fa-solid fa-ban me-1"></i> Buyurtma bekor qilindi.</span>
+                            </label>
+                        {% else %}
+                            <label class="status-option">
+                                <input class="form-check-input me-2" type="radio" name="status" value="packing"
+                                        {% if order.status == 'packing' %} checked {% endif %} required>
+                                <span class="status-content">Yangi</span>
+                                <span class="status-desc bg-info text-dark"><i class="fa-solid fa-star me-1"></i> Buyurtma yangi holatda qabul qilindi.</span>
+                            </label>
+                            <label class="status-option">
+                                <input class="form-check-input me-2" type="radio" name="status" value="ready"
+                                        {% if order.status == 'ready' %} checked {% endif %} required>
+                                <span class="status-content">Dastavkaga tayyor</span>
+                                <span class="status-desc bg-primary text-white"><i class="fa-solid fa-box me-1"></i> Klient buyurtma olishga tayyor.</span>
+                            </label>
+                            <label class="status-option">
+                                <input class="form-check-input me-2" type="radio" name="status" value="postponed"
+                                        {% if order.status == 'postponed' %} checked {% endif %} required>
+                                <span class="status-content">Qo'ng'iroq qilib bo'lmadi</span>
+                                <span class="status-desc bg-warning text-dark"><i
+                                        class="fa-solid fa-phone-slash me-1"></i> Telefon ko'tarmadi yoki o'chirilgan.</span>
+                            </label>
+                            <label class="status-option">
+                                <input class="form-check-input me-2" type="radio" name="status" value="cancelled"
+                                        {% if order.status == 'cancelled' %} checked {% endif %} required>
+                                <span class="status-content">Nosoz, bekor qilindi</span>
+                                <span class="status-desc bg-danger text-white"><i
+                                        class="fa-solid fa-circle-xmark me-1"></i> Klient tomonidan shikoyat tushdi.</span>
+                            </label>
+                            <label class="status-option">
+                                <input class="form-check-input me-2" type="radio" name="status" value="archive"
+                                        {% if order.status == 'archive' %} checked {% endif %} required>
+                                <span class="status-content">Arxivlandi</span>
+                                <span class="status-desc bg-secondary text-white"><i
+                                        class="fa-solid fa-folder-open me-1"></i> Noto'g'ri nomer, dubl buyurtma.</span>
+                            </label>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="mb-2">
+                        <label for="comment" class="form-label required-label"><strong>Komment:</strong></label>
+                        <textarea name="comment" class="form-control" id="comment" rows="3"
+                                  placeholder="Ushbu buyurtma uchun izoh..." required>{{ order.comment }}</textarea>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-3 mt-4">
+                    <a href="{% url 'operator-page' %}"
+                       class="btn btn-light border btn-lg fs-6 px-4 py-2.5 text-secondary fw-semibold rounded-3">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Chiqish
+                    </a>
+                    <button type="submit"
+                            class="btn btn-primary btn-lg fs-6 px-5 py-2.5 fw-semibold rounded-3 shadow-sm">
+                        Yuborish <i class="fa-solid fa-paper-plane ms-1"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const regionSelect = document.querySelector('.admin-region-select');
+            const districtSelect = document.querySelector('.admin-district-select');
+
+            if (regionSelect && districtSelect) {
+                regionSelect.addEventListener('change', function () {
+                    const regionId = this.value;
+                    const baseUrl = this.getAttribute('data-url');
+
+                    if (!regionId || !baseUrl) {
+                        districtSelect.innerHTML = '<option value="" selected disabled>Tuman tanlang</option>';
+                        return;
+                    }
+
+                    const finalUrl = `${baseUrl}?region_id=${regionId}`;
+
+                    fetch(finalUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            districtSelect.innerHTML = '<option value="" selected disabled>Tuman tanlang</option>';
+                            data.forEach(district => {
+                                const option = document.createElement('option');
+                                option.value = district.id;
+                                option.textContent = district.title || district.name;
+                                districtSelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error('AJAX Error:', error));
+                });
+            }
+        });
+    </script>
+{% endblock %}

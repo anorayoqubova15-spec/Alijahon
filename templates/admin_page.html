@@ -1,0 +1,116 @@
+{% extends 'base/admin_page_base.html' %}
+
+{% block admin_body %}
+    <div class="col-md-9">
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <h3>Mening kabinetim</h3>
+                    </div>
+
+                    <div class="balance-grid">
+                        <div class="balance-item">
+                            <div class="label">Asosiy Balans</div>
+                            <div class="amount">0 so'm</div>
+                        </div>
+                        <div class="balance-item" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                            <div class="label">Yo'ldagi Pul</div>
+                            <div class="amount">0 so'm</div>
+                        </div>
+                        <div class="balance-item" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            <div class="label">
+                                <a href="/admin_page/coins" style="color: white; text-decoration: none;">Tangalar</a>
+                            </div>
+                            <div class="amount">0</div>
+                        </div>
+                    </div>
+
+                    <div class="api-key-section">
+                        <div class="label">API Key</div>
+                        <div class="api-key-content">
+                            <div class="api-key-wrapper">
+                                <div class="key" id="apiKeyDisplay">••••••••••••••••••••••••••••</div>
+                                <div class="key" id="apiKeyActual" style="display: none;">HseFYo6ReiiJ0lsccu2dc4A6vKO98dBq</div>
+                                <i class="icofont-eye toggle-eye" id="toggleIcon" onclick="toggleApiKey()" title="Ko'rsatish/Yashirish"></i>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="copyApiKey()">
+                                <i class="icofont-copy"></i> Nusxa olish
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="menu-grid">
+                        <a href="/admin_page/market" class="menu-item">
+                            <i class="icofont-shopping-cart"></i>
+                            <div class="text">
+                                <h5>Market</h5>
+                                <p>Mahsulotlarni ko'rish</p>
+                            </div>
+                        </a>
+
+                        <a href="/admin_page/urls" class="menu-item">
+                            <i class="icofont-link"></i>
+                            <div class="text">
+                                <h5>Havolalar</h5>
+                                <p>Oqimlarni boshqarish</p>
+                            </div>
+                        </a>
+
+                        <a href="/admin_page/requests" class="menu-item">
+                            <i class="icofont-list"></i>
+                            <div class="text">
+                                <h5>So'rovnomalar</h5>
+                                <p>Buyurtmalarni ko'rish</p>
+                            </div>
+                        </a>
+
+                        <a href="/admin_page/stats" class="menu-item">
+                            <i class="icofont-chart-bar-graph"></i>
+                            <div class="text">
+                                <h5>Statistika</h5>
+                                <p>Hisobotlar va tahlil</p>
+                            </div>
+                        </a>
+
+                        <a href="/admin_page/withdraw" class="menu-item">
+                            <i class="icofont-money"></i>
+                            <div class="text">
+                                <h5>To'lov</h5>
+                                <p>Pul yechish</p>
+                            </div>
+                        </a>
+
+                        <a href="/admin_page/competition" class="menu-item">
+                            <i class="icofont-trophy-alt"></i>
+                            <div class="text">
+                                <h5>Konkurs</h5>
+                                <p>Ishtirok etish</p>
+                            </div>
+                        </a>
+
+                        <a href="/profile/liked-products" class="menu-item">
+                            <i class="icofont-heart"></i>
+                            <div class="text">
+                                <h5>Saralanganlar</h5>
+                                <p>Yoqtirgan mahsulotlar</p>
+                            </div>
+                        </a>
+
+                        <a href="/profile/settings" class="menu-item">
+                            <i class="icofont-ui-settings"></i>
+                            <div class="text">
+                                <h5>Sozlamalar</h5>
+                                <p>Profilni tahrirlash</p>
+                            </div>
+                        </a>
+
+                        <a href="/profile/logout" class="menu-item">
+                            <i class="icofont-logout"></i>
+                            <div class="text">
+                                <h5>Chiqish</h5>
+                                <p>Tizimdan chiqish</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

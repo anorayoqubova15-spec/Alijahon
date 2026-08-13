@@ -1,0 +1,655 @@
+{% extends 'base/admin_page_base.html' %}
+{% load static %}
+
+
+{% block admin %}
+    <title> Admin - alijahon.uz </title>
+    <link rel="icon" type="image/png" href="https://alijahon.uz/static/apps/img/fav-icon.png">
+    <link href="{% static 'apps/Admin_my_accaunt_files/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'apps/Admin_my_accaunt_files/all.min.css' %} " rel="stylesheet">
+    <link href="{% static 'apps/Admin_my_accaunt_files/icofont.min.css' %} " rel="stylesheet">
+    <link href="{% static 'apps/Admin_my_accaunt_files/style.css' %} " rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'apps/Admin_my_accaunt_files/owl.carousel.css' %} ">
+    <link rel="stylesheet" href="{% static 'apps/Admin_my_accaunt_files/owl.theme.css' %} ">
+    <link rel="manifest" href="https://alijahon.uz/static/apps/json/manifest.json">
+
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #818cf8;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #3b82f6;
+            --dark-bg: #1e293b;
+            --light-bg: #f8fafc;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .btn {
+            border-radius: 12px;
+            padding: 10px 24px;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+        }
+
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            padding: 12px 16px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .table {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                margin-bottom: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .col-md-3, .col-md-9 {
+                padding: 0 10px;
+            }
+        }
+    </style>
+
+
+    <style>
+        .dashboard-container {
+            padding: 30px 0;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .stats-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .stats-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .balance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .balance-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 24px;
+            border-radius: 16px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(40%, -40%);
+        }
+
+        .balance-item .label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .balance-item .amount {
+            font-size: 28px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .api-key-section {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .api-key-section .label {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .api-key-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .api-key-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .api-key-wrapper:hover {
+            border-color: #667eea;
+        }
+
+        .api-key-section .key {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            color: #1e293b;
+            font-weight: 600;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .toggle-eye {
+            cursor: pointer;
+            color: #64748b;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+        }
+
+        .toggle-eye:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .menu-item {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #1e293b;
+        }
+
+        .menu-item:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.15);
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .menu-item i {
+            font-size: 32px;
+            margin-right: 16px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+        }
+
+        .menu-item .text {
+            flex: 1;
+        }
+
+        .menu-item .text h5 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .menu-item .text p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 4px 0 0 0;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 15px 0;
+            }
+
+            .stats-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .stats-header h3 {
+                font-size: 20px;
+            }
+
+            .balance-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .balance-item .amount {
+                font-size: 24px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .menu-item {
+                padding: 16px;
+            }
+
+            .menu-item i {
+                font-size: 28px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .api-key-section {
+                padding: 15px;
+            }
+
+            .api-key-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .api-key-wrapper {
+                padding: 10px 12px;
+            }
+
+            .api-key-section .key {
+                font-size: 15px;
+            }
+
+            .toggle-eye {
+                font-size: 22px;
+                width: 34px;
+                height: 34px;
+                flex-shrink: 0;
+            }
+
+            .btn-sm {
+                width: 100%;
+                margin-top: 8px;
+            }
+        }
+    </style>
+
+    <style>
+        .sidebar-modern {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            position: sticky;
+            top: 20px;
+        }
+
+        .user-profile-modern {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .user-profile-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.4;
+        }
+
+        .user-avatar-modern {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+        }
+
+        .user-info-modern {
+            color: white;
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .user-info-modern h6 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .user-info-modern p {
+            font-size: 13px;
+            opacity: 0.95;
+            margin-bottom: 4px;
+        }
+
+        .nav-modern {
+            padding: 10px 0;
+        }
+
+        .nav-modern .nav-item {
+            margin: 0;
+        }
+
+        .nav-modern .nav-link {
+            color: #64748b;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 15px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-modern .nav-link i {
+            font-size: 20px;
+            margin-right: 12px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-modern .nav-link:hover,
+        .nav-modern .nav-link.active {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.08) 0%, transparent 100%);
+            color: #667eea;
+            border-left-color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-modern {
+                margin-bottom: 20px;
+                position: static;
+            }
+
+            .user-profile-modern {
+                padding: 20px 15px;
+            }
+
+            .user-avatar-modern {
+                width: 80px;
+                height: 80px;
+            }
+
+            .user-info-modern h6 {
+                font-size: 16px;
+            }
+
+            .user-info-modern p {
+                font-size: 12px;
+            }
+
+            .nav-modern .nav-link {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .nav-modern .nav-link i {
+                font-size: 18px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+
+    <div class="col-md-9">
+        <div class="stats-card">
+            <div class="stats-header">
+                <h3>Mening kabinetim</h3>
+            </div>
+
+            <div class="balance-grid">
+                <div class="balance-item">
+                    <div class="label">Asosiy Balans</div>
+                    <div class="amount">0 so'm</div>
+                </div>
+                <div class="balance-item" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <div class="label">Yo'ldagi Pul</div>
+                    <div class="amount">0 so'm</div>
+                </div>
+                <div class="balance-item" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <div class="label">
+                        <a href="https://alijahon.uz/admin_page/coins" style="color: white; text-decoration: none;">Tangalar</a>
+                    </div>
+                    <div class="amount">0</div>
+                </div>
+            </div>
+
+            <div class="api-key-section">
+                <div class="label">API Key</div>
+                <div class="api-key-content">
+                    <div class="api-key-wrapper">
+                        <div class="key" id="apiKeyDisplay">••••••••••••••••••••••••••••</div>
+                        <div class="key" id="apiKeyActual" style="display: none;">HseFYo6ReiiJ0lsccu2dc4A6vKO98dBq
+                        </div>
+                        <i class="icofont-eye toggle-eye" id="toggleIcon" onclick="toggleApiKey()"
+                           title="Ko&#39;rsatish/Yashirish"></i>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="copyApiKey()">
+                        <i class="icofont-copy"></i> Nusxa olish
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-grid">
+                <a href="https://alijahon.uz/admin_page/market" class="menu-item">
+                    <i class="icofont-shopping-cart"></i>
+                    <div class="text">
+                        <h5>Market</h5>
+                        <p>Mahsulotlarni ko'rish</p>
+                    </div>
+                </a>
+
+                <a href="https://alijahon.uz/admin_page/urls" class="menu-item">
+                    <i class="icofont-link"></i>
+                    <div class="text">
+                        <h5>Havolalar</h5>
+                        <p>Oqimlarni boshqarish</p>
+                    </div>
+                </a>
+
+                <a href="https://alijahon.uz/admin_page/requests" class="menu-item">
+                    <i class="icofont-list"></i>
+                    <div class="text">
+                        <h5>So'rovnomalar</h5>
+                        <p>Buyurtmalarni ko'rish</p>
+                    </div>
+                </a>
+
+                <a href="https://alijahon.uz/admin_page/stats" class="menu-item">
+                    <i class="icofont-chart-bar-graph"></i>
+                    <div class="text">
+                        <h5>Statistika</h5>
+                        <p>Hisobotlar va tahlil</p>
+                    </div>
+                </a>
+
+                <a href="https://alijahon.uz/admin_page/withdraw" class="menu-item">
+                    <i class="icofont-money"></i>
+                    <div class="text">
+                        <h5>To'lov</h5>
+                        <p>Pul yechish</p>
+                    </div>
+                </a>
+
+                <a href="https://alijahon.uz/admin_page/competition" class="menu-item">
+                    <i class="icofont-trophy-alt"></i>
+                    <div class="text">
+                        <h5>Konkurs</h5>
+                        <p>Ishtirok etish</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'wishlist' %}" class="menu-item">
+                    <i class="icofont-heart"></i>
+                    <div class="text">
+                        <h5>Saralanganlar</h5>
+                        <p>Yoqtirgan mahsulotlar</p>
+                    </div>
+                </a>
+
+                <a href="https://alijahon.uz/profile/settings" class="menu-item">
+                    <i class="icofont-ui-settings"></i>
+                    <div class="text">
+                        <h5>Sozlamalar</h5>
+                        <p>Profilni tahrirlash</p>
+                    </div>
+                </a>
+
+                <a href="https://alijahon.uz/profile/logout" class="menu-item">
+                    <i class="icofont-logout"></i>
+                    <div class="text">
+                        <h5>Chiqish</h5>
+                        <p>Tizimdan chiqish</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="./Admin_my_accaunt_files/jquery.min.js"></script>
+    <script src="./Admin_my_accaunt_files/bootstrap.bundle.min.js"></script>
+
+    <script src="./Admin_my_accaunt_files/custom.js"></script>
+    <script src="./Admin_my_accaunt_files/jqBootstrapValidation.js"></script>
+    <script src="./Admin_my_accaunt_files/contact_me.js"></script>
+    <script src="./Admin_my_accaunt_files/owl.carousel.js"></script>
+
+
+{% endblock %}

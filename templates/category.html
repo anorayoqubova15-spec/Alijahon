@@ -1,0 +1,274 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+    {% load static %}
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="https://alijahon.uz/static/apps/img/fav-icon.png">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'cate/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome-->
+    <link href="{% static 'cate/all.min.css"' %}" rel="stylesheet">
+    <link href="{% static 'cate/icofont.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'cate/style.css' %}" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link href="{% static 'cate/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'cate/owl.theme.css' %}" rel="stylesheet">
+    <link href="{% static 'https://alijahon.uz/static/apps/json/manifest.json' %}" rel="manifest">
+
+    <!-- Modern UI Styles -->
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #818cf8;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #3b82f6;
+            --dark-bg: #1e293b;
+            --light-bg: #f8fafc;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        .btn {
+            border-radius: 12px;
+            padding: 10px 24px;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+        }
+
+        .form-control, .form-select {
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            padding: 12px 16px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .table {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                margin-bottom: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .col-md-3, .col-md-9 {
+                padding: 0 10px;
+            }
+        }
+    </style>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/static/apps/js/sw.js')
+                .then(function (reg) {
+                    console.log("Service Worker ro'yxatdan o'tdi!", reg);
+                })
+                .catch(function (err) {
+                    console.log("Service Worker xatosi!", err);
+                });
+        }
+    </script>
+
+
+    <link rel="stylesheet" href="{% static 'cate/product_by_category_style.css' %}">
+
+
+    <script src="{% static 'cate/jquery.min.js' %}"></script>
+    <script src="{% static 'cate/jquery.inputmask.bundle.js' %}"></script>
+    </script>
+
+
+    <section class="products-listing-page py-4">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Sidebar Categories -->
+                <div class="col-lg-3">
+                    <aside class="sidebar-filters">
+                        <div class="filter-card">
+                            <div class="filter-header" id="filterToggleBtn">
+                                <h5 class="filter-title">
+                                    <i class="icofont-filter"></i>
+                                    Kategoriyalar
+                                </h5>
+                                <button class="mobile-toggle-btn d-lg-none" type="button">
+                                    <i class="icofont-rounded-down"></i>
+                                </button>
+                            </div>
+                            <div class="filter-body" id="filterBody">
+                                <nav class="categories-nav">
+
+
+                                    {% for i in cate_data %}
+                                        <a href="{% url 'category-id' i.id %}?" class="category-link ">
+                                            <span class="category-name">{{ i.name }} </span>
+                                            <i class="icofont-rounded-right"></i>
+                                        </a>
+                                    {% endfor %}
+
+
+                                </nav>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-lg-9">
+                    <!-- Breadcrumb & Title -->
+                    <div class="page-header mb-4">
+                        <div class="breadcrumb-wrapper">
+                            <a href="{% static 'https://alijahon.uz/' %}" class="breadcrumb-link">
+                                <i class="icofont-home"></i>
+                                Bosh sahifa
+                            </a>
+                            <span class="breadcrumb-separator">
+                                <i class="icofont-thin-right"></i>
+                            </span>
+
+                            <span class="breadcrumb-current">Barchasi</span>
+
+                        </div>
+
+                        <h1 class="page-title">
+
+                            Barcha mahsulotlar
+
+                        </h1>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid">
+                        <div class="row g-3">
+
+
+                           {% for i in pro_data %}
+                           	 <div class="col-6 col-md-4">
+                                <div class="product-card">
+                                    <a href="" class="product-image-link">
+                                        <div class="product-image-wrapper">
+                                            <img src="{{ i.photo.url }}" class="product-image"
+                                                 alt="Nokia 108"
+                                                 loading="lazy">
+                                        </div>
+                                    </a>
+                                    <div class="product-info">
+                                        <h6 class="product-title">
+                                            <a href="">
+                                                {{ i.title }}
+                                            </a>
+                                        </h6>
+                                        <p class="product-price">
+                                            {{ i.price}} uzs
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                           {% endfor %}
+
+
+
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="{% static 'category_files/jquery.min.js' %}"></script>
+    <script src="{% static 'category_files/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'category_files/custom.js' %}"></script>
+    <!-- Contact form JavaScript -->
+    <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+    <script src="{% static 'category_files/jqBootstrapValidation.js' %}"></script>
+    <script src="{% static 'category_files/contact_me.js' %}"></script>
+    <!-- Owl Carousel -->
+    <script src="{% static 'category_files/owl.carousel.js' %}"></script>
+
+
+    <script defer="defer" src="{% static 'category_files/v833ccba57c9e4d2798f2e76cebdd09a11778172276447.es' %}"
+            integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ=="
+            data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;72b499923c304ca590d917e3955e9593&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}"
+            crossorigin="anonymous"></script>
+
+
+{% endblock %}
